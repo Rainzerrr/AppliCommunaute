@@ -1,5 +1,6 @@
 package com.example.applisondage.adapter
 
+import android.util.Log.e
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,17 +11,17 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.applisondage.MainActivity
 import com.example.applisondage.R
+import com.example.applisondage.fragments.SondageAlimentaire.Companion.prodList
 import com.example.applisondage.model.ActuModel
 import com.example.applisondage.model.ProduitModel
 import com.example.applisondage.model.SondageModel
 import kotlinx.coroutines.processNextEventInCurrentThread
 
-class ProduitAdapter(val context : MainActivity, val produitList : List<ProduitModel>, val type : String,  val notifyDataSetChangedCallback: () -> Unit) : RecyclerView.Adapter<ProduitAdapter.ViewHolder>(){
+class ProduitAdapter(val context : MainActivity, val produitList : MutableList<ProduitModel>, val type : String,  val updateProgressBar: () -> Unit) : RecyclerView.Adapter<ProduitAdapter.ViewHolder>(){
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val produitName = view.findViewById<TextView>(R.id.alimentName)
         val produitTrash = view.findViewById<ImageView>(R.id.img_trash)
-        val progressBar = view.findViewById<ProgressBar>(R.id.progressBar4)
 
     }
 
@@ -53,7 +54,10 @@ class ProduitAdapter(val context : MainActivity, val produitList : List<ProduitM
                 }
                 else{
                     produitsChoisis.add(currentProduit)
-                    notifyDataSetChangedCallback.invoke()
+                    produitList.remove(currentProduit)
+                    prodList.remove(currentProduit)
+                    notifyDataSetChanged()
+                    updateProgressBar.invoke()
                     Toast.makeText(context, currentProduit.nomProd + " ajouté", Toast.LENGTH_SHORT).show()
                 }
 
@@ -63,8 +67,10 @@ class ProduitAdapter(val context : MainActivity, val produitList : List<ProduitM
             holder.produitName.text = currentProduit.nomProd
             holder.produitTrash.setOnClickListener {
                 produitsChoisis.remove(currentProduit)
+                produitList.remove(currentProduit)
+                prodList.add(currentProduit)
                 notifyDataSetChanged()
-                notifyDataSetChangedCallback.invoke()
+                updateProgressBar.invoke()
                 Toast.makeText(context, currentProduit.nomProd + " supprimé", Toast.LENGTH_SHORT).show()
             }
         }
@@ -72,7 +78,7 @@ class ProduitAdapter(val context : MainActivity, val produitList : List<ProduitM
 
     companion object{
         val produitsChoisis = arrayListOf<ProduitModel>()
-        fun getProdChoisis(): List<ProduitModel>{
+        fun getProdChoisis(): MutableList<ProduitModel>{
             return produitsChoisis
         }
     }

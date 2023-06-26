@@ -17,6 +17,11 @@ class SondageHome(val context : MainActivity) : Fragment() {
         buttonStart?.setOnClickListener{
             context.loadFragment(Enregistrement1(context))
         }
+
+        val buttonResult = view?.findViewById<Button>(R.id.button_results)
+        buttonResult?.setOnClickListener{
+            context.loadFragment(Resultats(context))
+        }
         return view
     }
     override fun onStart() {

@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import com.example.applisondage.MainActivity
 import com.example.applisondage.R
 import com.example.applisondage.adapter.ProduitAdapter
+import com.example.applisondage.model.ProduitModel
+
 
 class SondageAlimentaire(val context : MainActivity) : Fragment() {
     override fun onCreateView(
@@ -44,4 +46,9 @@ class SondageAlimentaire(val context : MainActivity) : Fragment() {
 
         return view
     }
+    companion object{
+        val prodList = MainActivity().CreateProdList()
+    }
 }
+
+

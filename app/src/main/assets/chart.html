@@ -1,0 +1,205 @@
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="Chart"></canvas>
+    <script>
+        const graph_score = document.getElementById("score_sante").getContext("2d");
+        const graph_cat = document.getElementById("categories1").getContext("2d");
+        const graph_cat2 = document.getElementById("categories2").getContext("2d");
+        const graph_types = document.getElementById("types").getContext("2d");
+        let nbParCat = [];
+        let nomCat = [];
+        let scoreSanteRepartition = [];
+        let habitudesAlimRepartition = [];
+
+        Chart.defaults.global.defaultFontSize = 18;
+
+        $(document).ready(async function () {
+        await $.ajax({
+            url: 'getScoreSante.php',
+            dataType: 'json',
+            success: function (data) {
+            for (let i = 0; i < 5; i++) {
+                scoreSanteRepartition.push(parseInt(data[0][i]));
+            }
+            }
+        })
+
+        await $.ajax({
+            url: 'getHabitudesAlim.php',
+            dataType: 'json',
+            success: function (data) {
+            for (let i = 0; i < 4; i++) {
+                habitudesAlimRepartition.push(parseInt(data[0][i]));
+            }
+            }
+        })
+
+        await $.ajax({
+            url: 'getRepartitionAlim.php',
+            dataType: 'json',
+            success: function (data) {
+            for (let i = 0; i < data.length; i++) {
+                nbParCat.push(parseInt(data[i][1]));
+                nomCat.push((data[i][0]));
+            }
+            }
+        })
+
+        show_diagrams();
+        });
+        function show_diagrams() {
+            // -------------SCORE SANTE ------------- //
+            let score_sante = new Chart(graph_score, {
+                type: "pie",
+                data: {
+                    labels: [
+                        "A",
+                        "B",
+                        "C",
+                        "D",
+                        "E",
+                    ],
+                    datasets: [
+                        {
+                            data: scoreSanteRepartition,
+                            backgroundColor: [
+                                "rgb(153, 255, 153)",
+                                "rgb(204, 255, 153)",
+                                "rgb(255, 255, 153)",
+                                "rgb(255, 204, 153)",
+                                "rgb(255, 153, 153)",
+                            ],
+                            hoverBorderWidth: 3,
+                        },
+                    ],
+                },
+                options: {
+                    title: {
+                        display: false,
+                    },
+                    legend: {
+                        display: true,
+                        position: 'right',
+                    },
+                },
+            });
+
+            // -------------TYPE------------- //
+            let types = new Chart(graph_types, {
+                type: "bar",
+                data: {
+                    labels: [
+                        "Halal",
+                        "Casher",
+                        "Bio",
+                        "Vegan",
+                    ],
+                    datasets: [
+                        {
+                            data: habitudesAlimRepartition,
+                            backgroundColor: [
+                                "rgb(255, 153, 153)",
+                                "rgb(153, 153, 255)",
+                                "rgb(153, 255, 153)",
+                                "rgb(255, 255, 153)",
+                            ],
+                            barThickness: 35,
+                            hoverBorderWidth: 3,
+                        },
+                    ],
+                },
+                options: {
+                    title: {
+                        display: false,
+                    },
+                    legend: {
+                        display: false,
+                    },
+                    scales: {
+                        yAxes: [
+                            {
+                                ticks: {
+                                    beginAtZero: true,
+                                },
+                            },
+                        ],
+                    },
+                },
+            });
+
+            // -------------CATEGORIES1------------- //
+            let categories1 = new Chart(graph_cat, {
+                type: "horizontalBar",
+                data: {
+                    labels: nomCat,
+                    datasets: [
+                        {
+                            data: nbParCat,
+                            backgroundColor: [
+                                "rgb(255, 153, 153)",
+                                "rgb(255, 204, 153)",
+                                "rgb(255, 255, 153)",
+                                "rgb(204, 255, 153)",
+                                "rgb(153, 255, 153)",
+                                "rgb(153, 255, 204)",
+                                "rgb(153, 255, 255)",
+                                "rgb(153, 204, 255)",
+                                "rgb(153, 153, 255)",
+                                "rgb(204, 153, 255)",
+                                "rgb(255, 153, 255)",
+                            ],
+                            hoverBorderWidth: 4,
+                        },
+                    ],
+                },
+                options: {
+                    title: {
+                        display: false,
+                    },
+                    legend: {
+                        display: false,
+                    },
+                },
+            });
+
+            // -------------CATEGORIES2------------- //
+            let categories2 = new Chart(graph_cat2, {
+                type: "pie",
+                data: {
+                    labels: nomCat,
+                    datasets: [
+                        {
+                            data: nbParCat,
+                            backgroundColor: [
+                                "rgb(255, 153, 153)",
+                                "rgb(255, 204, 153)",
+                                "rgb(255, 255, 153)",
+                                "rgb(204, 255, 153)",
+                                "rgb(153, 255, 153)",
+                                "rgb(153, 255, 204)",
+                                "rgb(153, 255, 255)",
+                                "rgb(153, 204, 255)",
+                                "rgb(153, 153, 255)",
+                                "rgb(204, 153, 255)",
+                                "rgb(255, 153, 255)",
+                            ],
+                            hoverBorderWidth: 4,
+                        },
+                    ],
+                },
+                options: {
+                    title: {
+                        display: false,
+                    },
+                    legend: {
+                        display: false,
+                    },
+                },
+            });
+        }
+    </script>
+</body>
+</html>

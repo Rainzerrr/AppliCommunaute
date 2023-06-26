@@ -3,6 +3,7 @@ package com.example.applisondage.fragments
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log.e
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,127 +18,78 @@ import com.example.applisondage.MainActivity
 import com.example.applisondage.R
 import com.example.applisondage.adapter.ProduitAdapter
 import com.example.applisondage.adapter.SondageAdapter
+import com.example.applisondage.fragments.SondageAlimentaire.Companion.prodList
 import com.example.applisondage.model.DecouvModel
 import com.example.applisondage.model.ProduitModel
 
 class SondageAddProd(val context : MainActivity) : Fragment() {
-    private var prodList: List<ProduitModel> = listOf()
-    private var filteredProdList: MutableList<ProduitModel> = mutableListOf()
-    private var produitAdapter: ProduitAdapter = ProduitAdapter(context, prodList, "add", ::updateProgressBar)
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.sondage_add_produit, container, false)
-
+        prodList.sortedBy { it.nomProd }
         val buttonReturn = view?.findViewById<Button>(R.id.returnButton6)
         buttonReturn?.setOnClickListener {
             context.loadFragment(SondageAlimentaire(context))
         }
-
-
-        val rechercheProd = view.findViewById<EditText>(R.id.rechercheProd)
-        rechercheProd.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // No implementation needed
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                filterProducts(s.toString())
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                // No implementation needed
-            }
-        })
-
-        val prodList = CreateProdList()
-
-        val progressBar = view?.findViewById<ProgressBar>(R.id.progressBar5)
-        progressBar?.progress = ProduitAdapter.produitsChoisis.size * 10
-
+        var filteredProdList = context.CreateProdList()
         val verticalRV = view?.findViewById<RecyclerView>(R.id.rv_addproduit)
         verticalRV?.adapter = ProduitAdapter(context, prodList, "add", ::updateProgressBar)
         verticalRV?.layoutManager = LinearLayoutManager(context)
 
+        val rechercheProd = view.findViewById<EditText>(R.id.rechercheProd)
+        rechercheProd.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                filteredProdList.clear()
+                //val tempList: MutableList<ProduitModel> = mutableListOf()
+                for(prod in prodList){
+                    if(prod.nomProd.contains(s.toString())){
+                        e("dsaddas", prod.nomProd)
+                        e("dsaddas2", s.toString())
+                        filteredProdList.add(prod)
+                        e("dsaddas3", filteredProdList.get(0).nomProd)
+                    }
+
+                }
+//                e("dsaddas2", tempList.size.toString())
+//                e("dsaddas2", tempList.get(0).nomProd)
+//                filteredProdList = tempList
+//                e("dsaddas4", filteredProdList.get(0).nomProd)
+                val updatedAdapter = ProduitAdapter(context, filteredProdList, "add", ::updateProgressBar)
+                verticalRV?.adapter = updatedAdapter
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
+
+
+
+
+        val progressBar = view?.findViewById<ProgressBar>(R.id.progressBar5)
+        progressBar?.progress = ProduitAdapter.produitsChoisis.size * 10
+
+
+
+
         return view
     }
 
-    private fun filterProducts(query: String) {
-        filteredProdList.clear()
-        for (product in prodList) {
-            if (product.nomProd.contains(query, true)) {
-                filteredProdList.add(product)
-            }
-        }
-        produitAdapter.notifyDataSetChanged()
-    }
 
     private fun updateProgressBar() {
         val progressBar = view?.findViewById<ProgressBar>(R.id.progressBar5)
         progressBar?.progress = ProduitAdapter.produitsChoisis.size * 10
     }
 
-    private fun CreateProdList(): List<ProduitModel> {
-        // Create and return a dummy product list here
-        // Replace with your actual product list
-        // This is just a sample
-        return listOf(ProduitModel(
-            1,
-            "sltfdsgfdgf gfdagfd gvfdsvbgdf ssssssssssssssssssssssssss ssss"
-        ),
-            ProduitModel(
-                2,
-                "gjkjkj gfdagfd gvfdsvbgdfsssssssssssssssssssssssssssssssssssssssssssssssssss"
-            ),
 
-            ProduitModel(
-                3,
-                "sltfds"
-            ),
-            ProduitModel(
-                4,
-                "sltfvfdsvbgdf"
-            ),
-            ProduitModel(
-                5,
-                " gvfdsvbgdf"
-            ),
-            ProduitModel(
-                6,
-                "sltfdsgljkhgvbgdf"
-            ),
-            ProduitModel(
-                7,
-                "sltfdsgfd gvfdsvbgdf"
-            ),
-            ProduitModel(
-                8,
-                "sltfdsgfd"
-            ),
-            ProduitModel(
-                9,
-                "slhgfdhgf, bfdsvbgdf"
-            ),
-            ProduitModel(
-                10,
-                "sltfdsdf"
-            ),
-            ProduitModel(
-                11,
-                "sltfdsgfdgf gf;ihgjjkhgbgdf"
-            ),
-            ProduitModel(
-                12,
-                "sltfdsgffdagfd gvfdsvbgdf"
-            ),
-            ProduitModel(
-                13,
-                "slagfd gvfdsvbgdf"
-            )
-        )
-    }
     override fun onStart() {
         super.onStart()
         context.onUserLoaded(SondagePresentation(context))

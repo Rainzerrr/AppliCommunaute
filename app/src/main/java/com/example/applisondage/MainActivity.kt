@@ -19,6 +19,7 @@ import com.example.applisondage.fragments.HomeFragment
 import com.example.applisondage.fragments.Profil
 import com.example.applisondage.fragments.SondagePresentation
 import com.example.applisondage.model.CurrentUserProvider
+import com.example.applisondage.model.ProduitModel
 import com.example.applisondage.model.UserModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.FirebaseApp
@@ -33,6 +34,15 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         setContentView(R.layout.activity_main)
 
+
+
+
+
+
+
+
+
+        
         // Initialize Firestore
         firestore = FirebaseFirestore.getInstance()
         CurrentUserProvider.currentUser?.let { loadUserDataFromFirestore(it.userId) }
@@ -158,4 +168,64 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-}
+
+
+         fun CreateProdList(): MutableList<ProduitModel> {
+
+            return mutableListOf(
+                ProduitModel(
+                    1,
+                    "sltfdsgfdgf gfdagfd gvfdsvbgdf ssssssssssssssssssssssssss ssss"
+                ),
+                ProduitModel(
+                    2,
+                    "gjkjkj gfdagfd gvfdsvbgdfsssssssssssssssssssssssssssssssssssssssssssssssssss"
+                ),
+
+                ProduitModel(
+                    3,
+                    "sltfds"
+                ),
+                ProduitModel(
+                    4,
+                    "sltfvfdsvbgdf"
+                ),
+                ProduitModel(
+                    5,
+                    " gvfdsvbgdf"
+                ),
+                ProduitModel(
+                    6,
+                    "sltfdsgljkhgvbgdf"
+                ),
+                ProduitModel(
+                    7,
+                    "sltfdsgfd gvfdsvbgdf"
+                ),
+                ProduitModel(
+                    8,
+                    "sltfdsgfd"
+                ),
+                ProduitModel(
+                    9,
+                    "slhgfdhgf, bfdsvbgdf"
+                ),
+                ProduitModel(
+                    10,
+                    "sltfdsdf"
+                ),
+                ProduitModel(
+                    11,
+                    "sltfdsgfdgf gf;ihgjjkhgbgdf"
+                ),
+                ProduitModel(
+                    12,
+                    "sltfdsgffdagfd gvfdsvbgdf"
+                ),
+                ProduitModel(
+                    13,
+                    "slagfd gvfdsvbgdf"
+                )
+            )
+        }
+    }

@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.applisondage.KeepEntries
 import com.example.applisondage.MainActivity
+import com.example.applisondage.model.ProduitModel
 
 
 class Enregistrement2(val context : MainActivity) : Fragment() {
@@ -50,4 +51,6 @@ class Enregistrement2(val context : MainActivity) : Fragment() {
         KeepEntries.Entries.cp = view?.findViewById<EditText>(com.example.applisondage.R.id.enregistrementCp)?.text.toString()
         KeepEntries.Entries.ville = view?.findViewById<EditText>(com.example.applisondage.R.id.enregistrementVille)?.text.toString()
     }
+
+
 }

@@ -1,6 +1,7 @@
 package com.example.applisondage.fragments
 
 import android.os.Bundle
+import android.util.Log.e
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,16 +14,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.applisondage.MainActivity
 import com.example.applisondage.R
 import com.example.applisondage.adapter.ProduitAdapter
+import com.example.applisondage.fragments.SondageAlimentaire.Companion.prodList
 import com.example.applisondage.model.ProduitModel
 
-class SondageConsultProd(val context : MainActivity, private val prodList : List<ProduitModel>) : Fragment() {
+class SondageConsultProd(val context : MainActivity, private val prodList2 : MutableList<ProduitModel>) : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.sondage_consult_produit, container, false)
-
+        prodList.sortedBy { it.nomProd }
         val buttonReturn = view?.findViewById<Button>(R.id.returnButton7)
         buttonReturn?.setOnClickListener {
             context.loadFragment(SondageAlimentaire(context))
@@ -31,7 +33,7 @@ class SondageConsultProd(val context : MainActivity, private val prodList : List
 
 
         val verticalRV = view?.findViewById<RecyclerView>(R.id.rv_consultproduit)
-        verticalRV?.adapter = ProduitAdapter(context, prodList, "consult", ::updateProgressBar)
+        verticalRV?.adapter = ProduitAdapter(context, prodList2, "consult", ::updateProgressBar)
         verticalRV?.layoutManager = LinearLayoutManager(context)
         val progressBar = view?.findViewById<ProgressBar>(R.id.progressBar4)
         progressBar?.progress = ProduitAdapter.produitsChoisis.size * 10
