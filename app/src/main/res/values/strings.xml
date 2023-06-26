@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">SAE</string>
+    <string name="home_bjr">Bonjour</string>
+    <string name="menu_str_home">Accueil</string>
+    <string name="menu_str_sondage">Sondages</string>
+    <string name="menu_str_social">Social</string>
+    <string name="home_nom">Inconnu</string>
+    <string name="home_actu">Les Actualités</string>
+    <string name="home_decouv">À Découvrir</string>
+    <string name="sondage_home_sujet">Dans le but de mieux connaitre ses habitants, la communauté réalise un sondage pour en apprendre d\'avantage sur les habitudes alimentaires de ses membres.</string>
+    <string name="sondage_home_title">Les Sondages</string>
+    <string name="sondage_subtitle">Sujet</string>
+    <string name="sondage_home_part"> Participants</string>
+    <string name="sondage_home_nbpart"> 3021</string>
+    <string name="sondage_home_duree"> Durée</string>
+    <string name="sondage_home_tmps">5 min</string>
+    <string name="sondage_home_results">Résultats</string>
+    <string name="sondage_home_start">Commencer</string>
+    <string name="sondage_desc">La communauté réalise souvent des sondages dans le but de mieux connaître ses membres, veuillez prendre quelques minutes pour répondre aux sondages :</string>
+    <string name="sondage1_sujet">Sujet : Habitudes alimentaires</string>
+    <string name="sondage1_duree">Durée : 5 minutes</string>
+    <string name="sondage_enregistrement_title1">Commençons…</string>
+    <string name="sondage_enregistrement_title2">Encore un peu…</string>
+    <string name="sondage_enregistrement_step1">Renseignez vos coordonnées 1/2</string>
+    <string name="sondage_enregistrement_step2">Renseignez vos coordonnées 2/2</string>
+    <string name="sondage_enregistrement_nom">Nom</string>
+    <string name="sondage_enregistrement_prenom">Prénom</string>
+    <string name="sondage_enregistrement_naiss">Date de Naissance</string>
+    <string name="sondage_enregistrement_tel">Téléphone</string>
+    <string name="sondage_enregistrement_suiv">Suivant</string>
+    <string name="sondage_enregistrement_ville">Ville</string>
+    <string name="sondage_enregistrement_adresse">Adresse</string>
+    <string name="sondage_enregistrement_cp">Code Postal</string>
+    <string name="sondage_enregistrement_retour">Retour</string>
+    <string name="sondage_inprogress">Sondage en cours de préparation</string>
+    <string name="connexion_forgot_mdp">Mot de passe oublié ?</string>
+    <string name="connexion_login_btn">Se Connecter</string>
+    <string name="create_acc_btn">Créer</string>
+    <string name="conn_no_account">Pas de compte ? Créer vous-en un !</string>
+    <string name="already_acc">Déjà un Compte ? Connectez-vous !</string>
+    <string name="email">Email</string>
+    <string name="password">Mot de passe</string>
+    <string name="profil_logout">Se Déconnecter</string>
+    <string name="profil_change_photo">Changer photo de profil</string>
+    <string name="verifier_emplacement">Vérifier Emplacement</string>
+
+
+</resources>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="320dp"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="30dp"
+    android:background="@color/bg_color"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp">
+
+    <TextView
+        android:id="@+id/sondage_sujet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sondage1_sujet"
+        android:theme="@style/textBold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.164" />
+
+    <TextView
+        android:id="@+id/sondage_duree"
+        android:layout_width="match_parent"
+        android:layout_height="27dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="37dp"
+        android:text="@string/sondage1_duree"
+        android:theme="@style/text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/sondage_sujet"
+        app:layout_constraintTop_toTopOf="@+id/sondage_sujet"
+        app:layout_constraintVertical_bias="0.407" />
+</androidx.constraintlayout.widget.ConstraintLayout>

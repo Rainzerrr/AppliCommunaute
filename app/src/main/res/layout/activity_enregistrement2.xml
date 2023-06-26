@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/defaultMargin">
+
+    <TextView
+        android:id="@+id/enregistrement2Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sondage_enregistrement_title2"
+        android:theme="@style/Title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="374sp"
+        android:layout_height="27dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.733"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enregistrement2Title"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/enregistrement2SubTitle"
+        android:layout_width="200sp"
+        android:layout_height="60sp"
+        android:layout_marginTop="24dp"
+        android:text="@string/sondage_enregistrement_step2"
+        android:theme="@style/subTitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/returnButton2"
+        android:layout_width="150sp"
+        android:layout_height="60sp"
+        android:layout_marginStart="12dp"
+        android:text="@string/sondage_enregistrement_retour"
+        android:theme="@style/textButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/enregistrement2SubTitle"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/enregistrementAdress"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="@string/sondage_enregistrement_adresse"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enregistrement2SubTitle"
+        app:layout_constraintVertical_bias="0.033" />
+
+    <EditText
+        android:id="@+id/enregistrementCp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:hint="@string/sondage_enregistrement_cp"
+        android:inputType="number"
+        android:maxLength="5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enregistrementAdress"
+        app:layout_constraintVertical_bias="0.05" />
+
+    <EditText
+        android:id="@+id/enregistrementVille"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:hint="@string/sondage_enregistrement_ville"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enregistrementCp"
+        app:layout_constraintVertical_bias="0.05" />
+
+    <Button
+        android:id="@+id/button_next_2"
+        android:layout_width="175dp"
+        android:layout_height="75dp"
+        android:text="@string/sondage_enregistrement_suiv"
+        android:theme="@style/textButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enregistrementVille"
+        app:layout_constraintVertical_bias="0.144" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

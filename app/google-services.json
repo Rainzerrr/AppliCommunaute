@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1048922936670",
+    "project_id": "appli-sondage",
+    "storage_bucket": "appli-sondage.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1048922936670:android:1f0461cd676e0771712bcf",
+        "android_client_info": {
+          "package_name": "com.example.applisondage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1048922936670-ngvhmumlnl891jegd20lmlt0hvandkus.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6ZJ0qe4upcv1nhGqcMKKVi4Os8GwQ738"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1048922936670-ngvhmumlnl891jegd20lmlt0hvandkus.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

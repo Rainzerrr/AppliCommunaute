@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/img_profil2"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/baseline_person_24"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"/>
+
+
+    <Button
+        android:id="@+id/changePhotoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profil_change_photo"
+        android:layout_below="@id/img_profil2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
+
+
+    <TextView
+        android:id="@+id/nameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sondage_enregistrement_nom"
+        android:textSize="18sp"
+        android:layout_below="@id/changePhotoButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/emailTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/email"
+        android:textSize="16sp"
+        android:layout_below="@id/nameTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/villeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sondage_enregistrement_ville"
+        android:textSize="16sp"
+        android:layout_below="@id/emailTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profil_logout"
+        android:theme="@style/textButton"
+        android:layout_below="@id/villeTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/returnButton4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sondage_enregistrement_retour"
+        android:theme="@style/textButton"
+        android:layout_below="@id/logoutButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
+
+</RelativeLayout>
