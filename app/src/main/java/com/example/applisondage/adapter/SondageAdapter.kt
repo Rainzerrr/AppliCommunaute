@@ -17,7 +17,7 @@ class SondageAdapter(val context : MainActivity, val sondageList : List<SondageM
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.sondages_layout, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.sondages_sujets_layout, parent, false)
         return ViewHolder(view)
     }
 
@@ -29,9 +29,9 @@ class SondageAdapter(val context : MainActivity, val sondageList : List<SondageM
         val currentSondage = sondageList[position]
         holder.sondageSujet.text = currentSondage.sujet
         holder.sondageDuree.text = currentSondage.duree
-        holder.itemView.setOnClickListener(View.OnClickListener(){
+        holder.itemView.setOnClickListener{
             context.loadFragment(currentSondage.sondage)
-        })
+        }
     }
 
 }

@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.applisondage.fragments.Enregistrement1
@@ -72,9 +73,11 @@ class MainActivity : AppCompatActivity() {
     fun hideKeyboard(activity: Activity) {
         val inputMethodManager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         val currentFocusView = activity.currentFocus
-        if (currentFocusView != null) {
-            inputMethodManager.hideSoftInputFromWindow(currentFocusView.windowToken, 0)
+        currentFocusView?.let { view ->
+            val imm = ContextCompat.getSystemService(activity, InputMethodManager::class.java)
+            imm?.hideSoftInputFromWindow(view.windowToken, 0)
         }
+        //currentFocusView?.clearFocus()
     }
 
     fun loadFragment(fragment: Fragment) {
@@ -137,7 +140,7 @@ class MainActivity : AppCompatActivity() {
                 val email = findViewById<TextView>(R.id.emailTextView)
                 val ville = findViewById<TextView>(R.id.villeTextView)
                 loadImage(CurrentUserProvider.currentUser!!.userId)
-                nomPrenom.text = CurrentUserProvider.currentUser?.nom + " " + CurrentUserProvider.currentUser?.prenom
+                nomPrenom.text = CurrentUserProvider.currentUser?.prenom + " " + CurrentUserProvider.currentUser?.nom
                 email.text = CurrentUserProvider.currentUser?.email
                 ville.text = CurrentUserProvider.currentUser?.ville
             }

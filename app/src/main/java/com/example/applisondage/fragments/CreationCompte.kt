@@ -8,7 +8,6 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
-import android.util.Log.e
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,9 +23,19 @@ import com.example.applisondage.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
+
 private val REQUEST_LOCATION_PERMISSION = 1001
 class CreationCompte(val context : MainActivity) : Fragment() {
+    //Localisation du centre de Paris
+    val targetLatitude: Double = 48.8564072
+    val targetLongitude: Double = 2.342653
+    //Taille du rayon de Paris
+    val targetRadius: Double = 60000.0
+
     private lateinit var location: LocationManager
+    private var lastLocation: Location? = null
+    var isLocationVerified:Boolean = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.create_account_layout, container, false)
         val buttonReturn= view?.findViewById<TextView>(R.id.alreadyAcc)
@@ -37,11 +46,21 @@ class CreationCompte(val context : MainActivity) : Fragment() {
         val verifEmplacement = view?.findViewById<Button>(R.id.verifButton)
         verifEmplacement?.setOnClickListener {
             location = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
             if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(context, "Veuillez autoriser l'accès à la localisation", Toast.LENGTH_SHORT).show()
                 ActivityCompat.requestPermissions(context, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION_PERMISSION)
             } else {
-                // Les autorisations sont déjà accordées, vous pouvez demander la localisation
-                requestLocationUpdates()
+                if (!location.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+                    Toast.makeText(context, "Veuillez activer la localisation", Toast.LENGTH_SHORT).show()
+                } else {
+                    requestLocationUpdates()
+                    if (!isLocationVerified){
+                        Toast.makeText(context, "Vérification de votre emplacement...", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(context, "Emplacement vérifié !", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
 
@@ -52,14 +71,17 @@ class CreationCompte(val context : MainActivity) : Fragment() {
             val s3  = view.findViewById<EditText>(R.id.villeEdit)?.text.toString()
             val s4  =  view.findViewById<EditText>(R.id.emailEdit)?.text.toString()
             val s5  = view.findViewById<EditText>(R.id.passwordEdit)?.text.toString()
-            if( s1 != "" && s2 != "" && s3 != "" && s4 != "" && s5 != "" && true){
-                registerUser(s1,s2,s3,s4,s5,true)
-            }
-            else if (false){
+
+            if (!isLocationVerified) {
+                Toast.makeText(context, "Veuillez vérifier votre emplacement", Toast.LENGTH_SHORT).show()
+            } else if( s1 != "" && s2 != "" && s3 != "" && s4 != "" && s5 != "" && isInGoodLocation()){
+                registerUser(s1,s2,s3,s4,s5)
+            } else if (!isInGoodLocation()){
                 Toast.makeText(context, "Vous n'êtes pas de la région, vous ne pouvez pas créer de compte !", Toast.LENGTH_SHORT).show()
             }
-            else
+            else{
                 Toast.makeText(context, "Veuillez remplir les champs correctement", Toast.LENGTH_SHORT).show()
+            }
 
         }
         return view
@@ -77,13 +99,6 @@ class CreationCompte(val context : MainActivity) : Fragment() {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return
         }
         location.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, locationListener)
@@ -91,6 +106,12 @@ class CreationCompte(val context : MainActivity) : Fragment() {
 
     private val locationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
+            lastLocation = location
+            if (!isLocationVerified){
+                isLocationVerified = true
+                Toast.makeText(context, "Emplacement vérifié !", Toast.LENGTH_SHORT).show()
+            }
+
             val latitude = location.latitude
             val longitude = location.longitude
             // Utilisez les coordonnées de localisation selon vos besoins
@@ -111,7 +132,17 @@ class CreationCompte(val context : MainActivity) : Fragment() {
 //
 //    }
 
-    fun registerUser(nom: String, prenom:String, ville: String, email: String, password: String, verifyLocation: Boolean) {
+    private fun isInGoodLocation(): Boolean {
+        val distances: FloatArray = FloatArray(1)
+        Location.distanceBetween(lastLocation!!.latitude, lastLocation!!.longitude, targetLatitude, targetLongitude, distances)
+        if (distances[0] < targetRadius){
+            return true
+        }
+        return false
+    }
+
+
+    fun registerUser(nom: String, prenom:String, ville: String, email: String, password: String) {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {

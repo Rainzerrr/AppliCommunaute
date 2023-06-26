@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/defaultMargin">
+
+    <TextView
+        android:id="@+id/titleSondageAlim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sondage_alimentaire_title"
+        android:theme="@style/Title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ProgressBar
+        android:id="@+id/progressBar3"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="374sp"
+        android:layout_height="27sp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleSondageAlim"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/selectionnezProd"
+        android:layout_width="200sp"
+        android:layout_height="90sp"
+        android:layout_marginTop="24dp"
+        android:text="@string/sondage_alimentaire_selectionnez"
+        android:theme="@style/textBold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar3"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/button_addProd"
+        android:layout_width="300sp"
+        android:layout_height="60sp"
+        android:layout_marginTop="60sp"
+        android:text="@string/sondage_alim_addprod"
+        android:theme="@style/textButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selectionnezProd"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/button_consultProd"
+        android:layout_width="300sp"
+        android:layout_height="60sp"
+        android:layout_marginTop="40sp"
+        android:text="@string/sondage_alim_consultprod"
+        android:theme="@style/textButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_addProd"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/returnButton5"
+        android:layout_width="150sp"
+        android:layout_height="60sp"
+        android:text="@string/sondage_enregistrement_retour"
+        android:theme="@style/textButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/selectionnezProd"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+
+    <Button
+        android:id="@+id/button_finish"
+        android:layout_width="250dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="60sp"
+        android:text="@string/sondage_terminer"
+        android:theme="@style/textButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_consultProd"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>

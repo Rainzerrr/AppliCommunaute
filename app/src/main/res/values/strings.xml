@@ -43,6 +43,14 @@
     <string name="profil_logout">Se Déconnecter</string>
     <string name="profil_change_photo">Changer photo de profil</string>
     <string name="verifier_emplacement">Vérifier Emplacement</string>
+    <string name="sondage_alimentaire_title">Vous touchez au but...</string>
+    <string name="sondage_alimentaire_selectionnez">Selectionnez 10 produits que vous consommez régulièrement</string>
+    <string name="sondage_alim_addprod">Ajouter un produit</string>
+    <string name="sondage_alim_consultprod">Consulter vos produits</string>
+    <string name="sondage_terminer">Terminer le sondage</string>
+    <string name="sondage_title_addprod">Ajouter un produit</string>
+    <string name="sondage_nomproduit">Nom du produit</string>
+    <string name="sondage_nom_aliment">Nom aliment</string>
 
 
 </resources>

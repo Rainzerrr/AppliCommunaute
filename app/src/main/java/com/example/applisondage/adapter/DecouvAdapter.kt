@@ -37,8 +37,8 @@ class DecouvAdapter(val context : MainActivity, val decouvList : List<DecouvMode
         Glide.with(context).load(Uri.parse(currentDecouv.imageUrl)).into(holder.decouvImage)
 
         holder.itemView.setOnClickListener {
-            val maps = Maps()
-            maps.initEmplacement(currentDecouv.desc.toString())
+            val maps = Maps(context)
+            maps.initEmplacement(currentDecouv.desc)
             context.loadFragment(maps)
         }
     }
