@@ -10,11 +10,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.applisondage.MainActivity
+import com.example.applisondage.MainActivity.Companion.prodList
 import com.example.applisondage.R
-import com.example.applisondage.fragments.SondageAlimentaire.Companion.prodList
 import com.example.applisondage.model.ActuModel
 import com.example.applisondage.model.ProduitModel
 import com.example.applisondage.model.SondageModel
+
 import kotlinx.coroutines.processNextEventInCurrentThread
 
 class ProduitAdapter(val context : MainActivity, val produitList : MutableList<ProduitModel>, val type : String,  val updateProgressBar: () -> Unit) : RecyclerView.Adapter<ProduitAdapter.ViewHolder>(){
@@ -22,6 +23,7 @@ class ProduitAdapter(val context : MainActivity, val produitList : MutableList<P
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val produitName = view.findViewById<TextView>(R.id.alimentName)
         val produitTrash = view.findViewById<ImageView>(R.id.img_trash)
+
 
     }
 
@@ -43,6 +45,7 @@ class ProduitAdapter(val context : MainActivity, val produitList : MutableList<P
         if (type == "add") {
             val currentProduit = produitList[position]
             holder.produitName.text = currentProduit.nomProd
+
             holder.itemView.setOnClickListener {
                 if(produitsChoisis.size == 10)
                 {
@@ -78,9 +81,6 @@ class ProduitAdapter(val context : MainActivity, val produitList : MutableList<P
 
     companion object{
         val produitsChoisis = arrayListOf<ProduitModel>()
-        fun getProdChoisis(): MutableList<ProduitModel>{
-            return produitsChoisis
-        }
     }
 
 }

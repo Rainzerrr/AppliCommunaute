@@ -1,15 +1,14 @@
 package com.example.applisondage
+import ApiService
 import com.example.applisondage.CustomTransformation.CircleCropTransformation
 import android.app.Activity
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log.e
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -25,6 +24,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.FirebaseApp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import org.json.JSONArray
+import org.json.JSONObject
+import java.lang.Integer.parseInt
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var firestore: FirebaseFirestore
@@ -35,14 +38,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
+        val apiService = ApiService(this, "https://privascentreardeche.online/back_end/getResultat.php")
+        apiService.fetchData(
+            onSuccess = { response ->
+                // Handle the JSON response here
+                processResponse(response)
+            },
+            onError = { error ->
 
+            }
+        )
 
-
-
-
-
-
-        
         // Initialize Firestore
         firestore = FirebaseFirestore.getInstance()
         CurrentUserProvider.currentUser?.let { loadUserDataFromFirestore(it.userId) }
@@ -74,7 +80,18 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+
     }
+
+    private fun processResponse(response: JSONArray) {
+        // Parse and process the JSON response
+        for (i in 0 until response.length()) {
+            val item: JSONObject = response.getJSONObject(i)
+            val produit = ProduitModel(parseInt(item["alim_code"].toString()),item["alim_nom_fr"].toString())
+            prodList.add(produit)
+        }
+    }
+
     fun getCurrentFragment(): Fragment? {
         val fragmentId = supportFragmentManager.findFragmentById(R.id.fragment_container)
         return fragmentId
@@ -169,63 +186,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
-         fun CreateProdList(): MutableList<ProduitModel> {
-
-            return mutableListOf(
-                ProduitModel(
-                    1,
-                    "sltfdsgfdgf gfdagfd gvfdsvbgdf ssssssssssssssssssssssssss ssss"
-                ),
-                ProduitModel(
-                    2,
-                    "gjkjkj gfdagfd gvfdsvbgdfsssssssssssssssssssssssssssssssssssssssssssssssssss"
-                ),
-
-                ProduitModel(
-                    3,
-                    "sltfds"
-                ),
-                ProduitModel(
-                    4,
-                    "sltfvfdsvbgdf"
-                ),
-                ProduitModel(
-                    5,
-                    " gvfdsvbgdf"
-                ),
-                ProduitModel(
-                    6,
-                    "sltfdsgljkhgvbgdf"
-                ),
-                ProduitModel(
-                    7,
-                    "sltfdsgfd gvfdsvbgdf"
-                ),
-                ProduitModel(
-                    8,
-                    "sltfdsgfd"
-                ),
-                ProduitModel(
-                    9,
-                    "slhgfdhgf, bfdsvbgdf"
-                ),
-                ProduitModel(
-                    10,
-                    "sltfdsdf"
-                ),
-                ProduitModel(
-                    11,
-                    "sltfdsgfdgf gf;ihgjjkhgbgdf"
-                ),
-                ProduitModel(
-                    12,
-                    "sltfdsgffdagfd gvfdsvbgdf"
-                ),
-                ProduitModel(
-                    13,
-                    "slagfd gvfdsvbgdf"
-                )
-            )
-        }
+    companion object{
+        val prodList :MutableList<ProduitModel> = mutableListOf()
+    }
     }

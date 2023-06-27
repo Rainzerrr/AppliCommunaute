@@ -12,9 +12,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.applisondage.MainActivity
+import com.example.applisondage.MainActivity.Companion.prodList
+
 import com.example.applisondage.R
 import com.example.applisondage.adapter.ProduitAdapter
-import com.example.applisondage.fragments.SondageAlimentaire.Companion.prodList
 import com.example.applisondage.model.ProduitModel
 
 class SondageConsultProd(val context : MainActivity, private val prodList2 : MutableList<ProduitModel>) : Fragment() {

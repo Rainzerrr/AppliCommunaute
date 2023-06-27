@@ -20,7 +20,7 @@ class Resultats(val context : MainActivity) : Fragment() {
         val view = inflater.inflate(R.layout.resultats_layout, container, false)
         val chartWebView = view.findViewById<WebView>(R.id.chartWebView)
         chartWebView.settings.javaScriptEnabled = true
-        chartWebView.loadUrl("file:///android_asset/chart.html")
+        chartWebView.loadUrl("https://privascentreardeche.online/layouts/resultatSondage.php")
 
 
         return view

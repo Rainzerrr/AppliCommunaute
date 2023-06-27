@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.applisondage.MainActivity
 import com.example.applisondage.R
+import com.example.applisondage.model.CurrentUserProvider
 import com.example.applisondage.model.SondageModel
 
 class SondageAdapter(val context : MainActivity, val sondageList : List<SondageModel>) : RecyclerView.Adapter<SondageAdapter.ViewHolder>(){
@@ -30,7 +32,14 @@ class SondageAdapter(val context : MainActivity, val sondageList : List<SondageM
         holder.sondageSujet.text = currentSondage.sujet
         holder.sondageDuree.text = currentSondage.duree
         holder.itemView.setOnClickListener{
-            context.loadFragment(currentSondage.sondage)
+            if(CurrentUserProvider.currentUser == null)
+            {
+                Toast.makeText(context, "Veuillez vous connecter pour accéder aux sondages", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                context.loadFragment(currentSondage.sondage)
+            }
+
         }
     }
 
